@@ -55,7 +55,7 @@ class GridPublisherNode:
 
 
 if __name__ == '__main__':
-    filename = 'result_gas_station.npy'
+    filename = 'map_processed.npy'
     map_1 = np.load(filename)
     res = 0.1
     map_range = np.array([[-50., -50.], [130., 50.]])
