@@ -1,8 +1,6 @@
 #!/usr/bin/python
 #-*- encoding: utf8 -*-
 
-#TODO:
-#获取相机位姿，而不是无人机位姿
 from scipy.spatial.transform import Rotation as R
 import rospy
 import numpy as np
@@ -13,8 +11,8 @@ from nav_msgs.msg import OccupancyGrid
 
 #输入两个点的坐标和地图分辨率、原点位置，输出一个list，按顺序包含连接这两点线段经过的所有格子坐标
 def getCellList(pt1, pt2, res, origin):
-    (x1, y1) = (pt1 - origin[:2]) / res
-    (x2, y2) = (pt2 - origin[:2]) / res
+    (x1, y1) = (pt1[:2] - origin[:2]) / res
+    (x2, y2) = (pt2[:2] - origin[:2]) / res
     cell_list = []
     if abs(x1-x2) < 1e-6 or math.floor(x1) == math.floor(x2):
         if y1 <= y2:
@@ -151,10 +149,10 @@ class FakeDetectorNode:
         map_origin = np.array([self.grid_msg_.info.origin.position.x, self.grid_msg_.info.origin.position.y])
         cell_list = getCellList(camera_xy, target_xy, map_res, map_origin)
         print('(%f,%f)' % (map_width, map_height))
-        print(cell_list)
         for ind in cell_list:
+            if ind[0] < 0 or ind[0] >= map_width or ind[1] < 0 or ind[1] >= map_height:
+                break
             if self.grid_msg_.data[ind[1]*map_width+ind[0]] > 0:
-                print(ind)
                 return False
         print(3)
 
@@ -188,8 +186,8 @@ class FakeDetectorNode:
         self.fy_ = msg.K[4]
         self.cx_ = msg.K[2]
         self.cy_ = msg.K[5]
-        self.h_ = 2*msg.height
-        self.w_ = 2*msg.width
+        self.h_ = msg.height
+        self.w_ = msg.width
         self.is_intrinsics_init_ = True
 
 
