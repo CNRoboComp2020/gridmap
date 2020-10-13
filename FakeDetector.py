@@ -51,14 +51,14 @@ def getCellList(pt1, pt2, res, origin):
         else:
             for y in range(int(math.floor(y2))+1, int(math.floor(y1))+1):
                 intersect_list.append([(float(y)-b)/k, float(y), 1])
-        intersect_list.sort(cmp = lambda p, q: 1 if p[0]>q[0] else (-1 if p[0]<q[0] else 0))
+        intersect_list.sort(cmp = lambda p, q: 1 if p[0]>q[0] else (-1 if p[0]<q[0] else 0)) #此处可优化
         for pt in intersect_list:
-            if pt[2]:  #交线平行于x轴
+            if pt[2]:  #交线平行于y轴
                 if k > 0:
                     cell_list.append([int(math.floor(pt[0])), int(pt[1])-1])
                 else:
                     cell_list.append([int(math.floor(pt[0])), int(pt[1])])
-            else:  #交线平行于y轴
+            else:  #交线平行于x轴
                 cell_list.append([int(pt[0])-1, int(math.floor(pt[1]))])
         cell_list.append([int(math.floor(x2)), int(math.floor(y2))])
         if inv:
