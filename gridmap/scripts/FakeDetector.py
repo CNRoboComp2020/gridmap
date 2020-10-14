@@ -21,6 +21,7 @@ def getCellList(pt1, pt2, res, origin):
         else:
             for y in range(int(math.floor(y2)), int(math.floor(y1))+1):
                 cell_list.append([int(math.floor(x1)), y])
+            cell_list = list(reversed(cell_list))
         pass
     elif abs(y1-y2) < 1e-6 or math.floor(y1) == math.floor(y2):
         if x1 <= x2:
@@ -29,6 +30,7 @@ def getCellList(pt1, pt2, res, origin):
         else:
             for x in range(int(math.floor(x2)), int(math.floor(x1))+1):
                 cell_list.append([x, int(math.floor(y1))])
+            cell_list = list(reversed(cell_list))
         pass
     else:
         #思路：求解线段与格线的所有交点，进而得到线段经过的所有格子
@@ -51,14 +53,14 @@ def getCellList(pt1, pt2, res, origin):
         else:
             for y in range(int(math.floor(y2))+1, int(math.floor(y1))+1):
                 intersect_list.append([(float(y)-b)/k, float(y), 1])
-        intersect_list.sort(cmp = lambda p, q: 1 if p[0]>q[0] else (-1 if p[0]<q[0] else 0)) #此处可优化
+        intersect_list.sort(cmp = lambda p, q: 1 if p[0]>q[0] else (-1 if p[0]<q[0] else 0))
         for pt in intersect_list:
-            if pt[2]:  #交线平行于y轴
+            if pt[2]:  #交线平行于x轴
                 if k > 0:
                     cell_list.append([int(math.floor(pt[0])), int(pt[1])-1])
                 else:
                     cell_list.append([int(math.floor(pt[0])), int(pt[1])])
-            else:  #交线平行于x轴
+            else:  #交线平行于y轴
                 cell_list.append([int(pt[0])-1, int(math.floor(pt[1]))])
         cell_list.append([int(math.floor(x2)), int(math.floor(y2))])
         if inv:

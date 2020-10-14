@@ -13,7 +13,7 @@ if __name__ == '__main__':
     #cv2.waitKey()
 
     ret, binary = cv2.threshold(map_1_, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY)
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
     dst = cv2.dilate(binary, kernel)
     #cv2.imshow("dilate", dst)
     #cv2.waitKey()

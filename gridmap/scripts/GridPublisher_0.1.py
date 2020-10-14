@@ -3,6 +3,7 @@
 
 #读取.npy中已知大小、分辨率的二维数组，并以/nav_msgs/OccupancyGrid格式发布
 
+from Tools import getPackagePath
 import rospy
 import numpy as np
 import math
@@ -55,7 +56,7 @@ class GridPublisherNode:
 
 
 if __name__ == '__main__':
-    filename = 'map_processed.npy'
+    filename = getPackagePath('gridmap')+'/map/map_processed_0.1.npy'
     map_1 = np.load(filename)
     res = 0.1
     map_range = np.array([[-50., -50.], [130., 50.]])

@@ -3,6 +3,7 @@
 
 #接收来自激光雷达的信息并绘制栅格图
 
+from Tools import getPackagePath
 from scipy.spatial.transform import Rotation as R
 import scipy.misc
 import rospy
@@ -42,13 +43,13 @@ class MapDrawerNode:
 
         self.publishloop_timer_ = rospy.Timer(rospy.Duration(5), self.publishloopCallback)
         
-        #for debug
-        self.counter = 0
+        self.package_path_ = getPackagePath('gridmap')
+        self.counter_ = 0
 
         #尝试从文件中读取数据
-        if os.path.exists('map_1.npy'):
-            os.system('cp map_1.npy map_1_backup.npy')
-            self.map_1_ = np.load('map_1.npy').astype(np.int32).reshape(self.map_size_.tolist())
+        if os.path.exists(self.package_path_+'/map/map_1.npy'):
+            os.system('cp '+self.package_path_+'/map/map_1.npy '+self.package_path_+'/map/map_1_backup.npy')
+            self.map_1_ = np.load(self.package_path_+'/map/map_1.npy').astype(np.int32).reshape(self.map_size_.tolist())
         
         try:
             rospy.spin()
@@ -117,11 +118,11 @@ class MapDrawerNode:
         self.map_1_[self.map_1_>40] = 100
         map_result = self.map_1_.copy()
         
-        scipy.misc.toimage(map_result, cmin=0, cmax=100).save('outfile'+str(self.counter)+'.jpg')
+        scipy.misc.toimage(map_result, cmin=0, cmax=100).save('outfile'+str(self.counter_)+'.jpg')
         print('map_1.jpg saved.')
-        self.counter += 1
+        self.counter_ += 1
         
-        np.save('map_1.npy', self.map_1_.astype(np.uint8))
+        np.save(self.package_path_+'/map/map_1.npy', self.map_1_.astype(np.uint8))
 
         grid_msg = OccupancyGrid()
         grid_msg.header.stamp = rospy.Time.now()
