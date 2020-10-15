@@ -29,7 +29,7 @@
     <node pkg="gridmap" type="FakeCameraInfoPublisher.py" name="fake_camerainfo_publisher" output="screen">
     </node>
 
-    <node pkg="gridmap" type="GridPublisher_0.1.py" name="grid_publisher" output="screen">
+    <node pkg="gridmap" type="GridPublisher_0.5.py" name="grid_publisher" output="screen">
     </node>
 
     <node pkg="gridmap" type="VisibleGrid" name="visible_grid" output="screen">

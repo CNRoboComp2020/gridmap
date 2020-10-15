@@ -64,6 +64,6 @@
         </include>
     </group>
 
-    <node type="rviz" name="rviz" pkg="rviz" args="-d /home/dqs/gazebo_tools/gridmap/config.rviz" />
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find gridmap)/launch/config.rviz" />
 
 </launch>
