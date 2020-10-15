@@ -317,17 +317,12 @@ int main(int argc, char **argv)
     for (auto iter = cell_list.begin(); iter != cell_list.end(); iter++)
         cout << "(" << iter->first << "  " << iter->second << ")\n";
 */
-
     ros::init(argc, argv, "visible_grid_node");
 
     VisibleGridNode f;
 
-    if(!ros::ok())
-    {
-	return 0;
-    }
     //ros::Rate loop_rate(100);
-    while(true)
+    while(ros::ok())
     {
         f.gridUpdate();
         ros::spinOnce();
