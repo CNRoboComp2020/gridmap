@@ -206,7 +206,7 @@ void VisibleGridNode::gridUpdate()
     }
     double yaw = yaw_min;
     double yaw_step = this->res_ / this->max_dist_;
-    Eigen::Quaterniond R_wc_qua = this->R_wc_;
+    Eigen::Quaterniond R_wc_inv = this->R_wc_.conjugate();
     Eigen::Vector3d t_wc_vec = this->t_wc_;
     while (yaw <= yaw_max)
     {
@@ -226,7 +226,7 @@ void VisibleGridNode::gridUpdate()
             }
             double t_wt_x = this->origin_[0] + (double(iter->first) + 0.5) * this->res_;
             double t_wt_y = this->origin_[1] + (double(iter->second) + 0.5) * this->res_;
-            Eigen::Vector3d t_ct = R_wc_qua * (Eigen::Vector3d(t_wt_x, t_wt_y, 0.0) - t_wc_vec);
+            Eigen::Vector3d t_ct = R_wc_inv * (Eigen::Vector3d(t_wt_x, t_wt_y, 0.0) - t_wc_vec);
             double u = this->fx_ * (-t_ct[1]/t_ct[0]) + this->cx_;
             double v = this->fy_ * (-t_ct[2]/t_ct[0]) + this->cy_;
 
