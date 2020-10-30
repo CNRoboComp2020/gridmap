@@ -1,4 +1,8 @@
-Latest version: 将代码整合为catkin_workspace版本，新增了视野检测器（VisibleGrid），有C++和Python版本。Python版本不完善，速度也较慢，不建议使用。同时修改了部分其他代码。老版代码见版本v1.0。
+Latest version: 使用outdoor1_multi_walker.world前需要添加以下环境变量：
+export LD_LIBRARY_PATH=~/catkin_ws/src/gridmap/plugin:$LD_LIBRARY_PATH
+并将XTDrone中人物模型（5个.dae）复制到/usr/share/gazebo-9/media/models。
+
+上一版本：将代码整合为catkin_workspace版本，新增了视野检测器（VisibleGrid），有C++和Python版本。Python版本不完善，速度也较慢，不建议使用。同时修改了部分其他代码。老版代码见版本v1.0。
 
 可以roslaunch gridmap VisibleGrid_cpp_0.5.launch查看效果。
 
