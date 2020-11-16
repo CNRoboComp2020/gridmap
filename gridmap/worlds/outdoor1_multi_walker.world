@@ -174,7 +174,7 @@
 
     <actor name='actor6'>
       <skin>
-        <filename>walk_1.dae</filename>
+        <filename>walk_6.dae</filename>
         <scale>1</scale>
       </skin>
       <pose frame=''>10 0 0 0 -0 0</pose>
