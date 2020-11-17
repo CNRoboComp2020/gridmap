@@ -132,20 +132,23 @@ vector<pairii> getCellLists(Eigen::Vector2d pt1, Eigen::Vector2d pt2, double res
 
 VisibleGridNode::VisibleGridNode()
 {
+    n_.param<string>("vehicle_type", this->vehicle_type_, "iris");
+    n_.param<string>("vehicle_id", this->vehicle_id_, "0");
+
     this->is_grid_init_ = false;
     this->is_camera_init_ = false;
 
-    this->camera_name_ = "iris_0::base_link";
+    this->camera_name_ = this->vehicle_type_+"_"+this->vehicle_id_+"::base_link";
     
     this->is_intrinsics_init_ = false;
 
     this->max_dist_ = 30.0;
 
-    this->gridPub_ = n_.advertise<nav_msgs::OccupancyGrid>("/available_grid", 100);
+    this->gridPub_ = n_.advertise<nav_msgs::OccupancyGrid>(this->vehicle_type_+"_"+this->vehicle_id_+"/available_grid", 100);
 
     this->gridSub_ = n_.subscribe("/occupancy_grid", 1, &VisibleGridNode::occupancygridCallback, this, ros::TransportHints().tcpNoDelay());  
     this->linkposeSub_ = n_.subscribe("/gazebo/link_states", 1, &VisibleGridNode::linkposeCallback, this, ros::TransportHints().tcpNoDelay());  
-    this->intrinsicsSub_ = n_.subscribe("iris_0/usb_cam/camera_info", 1, &VisibleGridNode::intrinsicsCallback, this, ros::TransportHints().tcpNoDelay());
+    this->intrinsicsSub_ = n_.subscribe(this->vehicle_type_+"_"+this->vehicle_id_+"/usb_cam/camera_info", 1, &VisibleGridNode::intrinsicsCallback, this, ros::TransportHints().tcpNoDelay());
 
     this->publishloop_timer_ = n_.createTimer(ros::Duration(0.5), &VisibleGridNode::publishloopCallback, this);
 

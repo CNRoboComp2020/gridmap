@@ -33,6 +33,8 @@
     </node>
 
     <node pkg="gridmap" type="VisibleGrid" name="visible_grid" output="screen">
+        <param name="vehicle_type" type="string" value="iris"/>
+	<param name="vehicle_id" type="string" value="0"/>
     </node>
 
     <!-- PX4 SITL and Gazebo -->

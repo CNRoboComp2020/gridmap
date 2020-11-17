@@ -58,6 +58,9 @@ private:
     double max_dist_;
     vector<signed char> visible_grid_;
 
+    string vehicle_type_;
+    string vehicle_id_;
+
     ros::Publisher gridPub_;
 
     ros::Subscriber gridSub_;

@@ -59,7 +59,7 @@ Visualization Manager:
       Draw Behind: false
       Enabled: true
       Name: Map
-      Topic: /available_grid
+      Topic: /iris_0/available_grid
       Unreliable: false
       Use Timestamp: false
       Value: true
@@ -91,16 +91,16 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 247.44192504882812
+      Distance: 281.45428466796875
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 40.029449462890625
-        Y: -0.8131756782531738
-        Z: -16.303878784179688
+        X: 39.695640563964844
+        Y: 0.8792307376861572
+        Z: -16.304218292236328
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
@@ -109,7 +109,7 @@ Visualization Manager:
       Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.1385815143585205
+      Yaw: 3.1435816287994385
     Saved: ~
 Window Geometry:
   Displays:
@@ -128,4 +128,4 @@ Window Geometry:
     collapsed: false
   Width: 1200
   X: 405
-  Y: 75
+  Y: 45
