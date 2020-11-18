@@ -132,8 +132,10 @@ vector<pairii> getCellLists(Eigen::Vector2d pt1, Eigen::Vector2d pt2, double res
 
 VisibleGridNode::VisibleGridNode()
 {
-    n_.param<string>("vehicle_type", this->vehicle_type_, "iris");
-    n_.param<string>("vehicle_id", this->vehicle_id_, "0");
+    ros::param::param<string>("~vehicle_type", this->vehicle_type_, "iris");
+    ros::param::param<string>("~vehicle_id", this->vehicle_id_, "0");
+
+    cout << this->vehicle_type_ << endl << this->vehicle_id_ << endl;
 
     this->is_grid_init_ = false;
     this->is_camera_init_ = false;
